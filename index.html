@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flip-to-Learn Flashcard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div id="card-counter">
+    Card Counter: 0
+  </div>
+
+  <div class="flashcard" id="flashcard">
+    <div class="flashcard-inner">
+      <div class="flashcard-front">
+        <!-- Front content injected here -->
+      </div>
+      <div class="flashcard-back">
+        <!-- Back content injected here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="button-container" id="button-container">
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+  </div>
+
+  <div id="drop-zone"></div>
+
+  <div id="drop-overlay">
+    Drop your TXT deck file from Anki here to import
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

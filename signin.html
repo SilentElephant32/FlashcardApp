@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign In</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      margin-top: 12px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <label for="signin">Sign In</label><br />
+    <input id="signin" type="text" placeholder="Enter your userid" /><br />
+    <button id="signinBtn">Sign In</button>
+    <button id="signupBtn">Sign Up</button>
+    <div id="userIdDisplay" style="margin-top: 15px; font-weight: bold;"></div>
+  </div>
+
+
+  <script>
+    const apiBase = "http://127.0.0.1:5000";
+
+    const signinInput = document.getElementById('signin');
+    const signinBtn = document.getElementById('signinBtn');
+
+    signinBtn.addEventListener('click', () => {
+      const userId = signinInput.value.trim();
+      if (!userId) {
+        alert('Please enter your username');
+        return;
+      }
+
+      fetch(`${apiBase}/authenticate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId })
+      })
+        .then(response => {
+          if (response.ok) {
+            document.cookie = `userId=${encodeURIComponent(userId)}; path=/; max-age=31536000`;
+            window.location.href = 'index.html';
+
+          } else if (response.status === 404) {
+            alert('User not found');
+          } else {
+            alert('Error during authentication');
+          }
+        })
+        .catch(() => {
+          alert('Network error');
+        });
+    });
+
+    signupBtn.addEventListener('click', () => {
+      const userId = signinInput.value.trim();
+      if (!userId) {
+        alert('Please enter your username');
+        return;
+      }
+
+      fetch(`${apiBase}/createAcc`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json(); // return the promise here
+          } else if (response.status === 404) {
+            alert('User not found');
+            throw new Error('User not found');
+          } else {
+            alert('Error during authentication');
+            throw new Error('Authentication error');
+          }
+        })
+        .then(data => {
+          console.log('userId:', data.userId); // now data is JSON parsed
+          const display = document.getElementById('userIdDisplay');
+          display.textContent = `Your user ID is: ${data.userId}`;
+        })
+        .catch(() => {
+          alert('Network error');
+        });
+
+    });
+
+    // Optional: allow pressing Enter to submit
+    signinInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        signinBtn.click();
+      }
+    });
+  </script>
+</body>
+
+</html>

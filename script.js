@@ -167,21 +167,21 @@ const dropOverlay = document.getElementById('drop-overlay');
 
 dropZone.addEventListener('dragover', (e) => {
   e.preventDefault();
-  dropOverlay.style.display = 'block'; // show overlay with border/message
+  dropOverlay.style.display = 'block';
+  dropOverlay.style.pointerEvents = 'auto'; // only block while dragging
 });
 
 dropZone.addEventListener('dragleave', (e) => {
   e.preventDefault();
-  // hide drop zone
-  if (!dropZone.contains(e.relatedTarget)) {
-    dropOverlay.style.display = 'none';
-  }
+  dropOverlay.style.display = 'none';
+  dropOverlay.style.pointerEvents = 'none';
 });
 
 
 dropZone.addEventListener('drop', (e) => {
   e.preventDefault();
   dropOverlay.style.display = 'none';
+  dropOverlay.style.pointerEvents = 'none';
 
   const files = e.dataTransfer.files;
   if (files.length === 0) {

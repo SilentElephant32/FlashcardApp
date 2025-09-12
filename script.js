@@ -196,22 +196,33 @@ dropZone.addEventListener('drop', (e) => {
     return;
   }
 
+
+  // post to api database
   const reader = new FileReader();
 
   reader.onload = function (event) {
-    const fileText = event.target.result;  // File content as text
+    const fileText = event.target.result; 
     const deckJson = convertTextToJSON(fileText);
-    console.log(deckJson); // Your processed JSON here
+    console.log(deckJson); 
 
     const deckString = typeof deckJson === 'string' ? deckJson : JSON.stringify(deckJson);
 
-    // Prepare data to send
+
     const payload = {
       deck: deckString,
       userId: userId
     };
 
     postDeck(payload)
+
+    // small delay
+    setTimeout(() => {
+      calcDeckLength();
+    updateCardCounter();
+    renderFlashcard();
+}, 300);
+
+
   };
 
 
@@ -307,7 +318,7 @@ function calcDeckLength() {
 setTimeout(() => {
   calcDeckLength();
   updateCardCounter();
-}, 100);
+}, 300);
 
 
 // algorithm to find a card you struggled on or havnt done yet // TODO link to API

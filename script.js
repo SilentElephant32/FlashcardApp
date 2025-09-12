@@ -1,7 +1,7 @@
-// TODO: FIX BUTTONS NOT WORKING (CLICKING FLASHCARD, RATE BUTTONS)
-// SAVE CARD RATINGS AND MAKE ALGORITHM
+// TODO: FIX BUTTONS NOT WORKING (CLICKING FLASHCARD, RATE BUTTONS) // done
+// SAVE CARD RATINGS AND MAKE ALGORITHM // done
 
-const apiBase = "http://127.0.0.1:5000";
+const apiBase = "https://flashcardapp-api.onrender.com";
 let deck = [];
 let currentIndex = 0;
 let word = null;

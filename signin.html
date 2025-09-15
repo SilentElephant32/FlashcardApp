@@ -58,7 +58,7 @@
 
 
   <script>
-    const apiBase = "https://flashcardapp-api.onrender.com";
+    const apiBase = "https://flashcardapp-api.onrender.com/";
 
     const signinInput = document.getElementById('signin');
     const signinBtn = document.getElementById('signinBtn');
@@ -92,12 +92,7 @@
     });
 
     signupBtn.addEventListener('click', () => {
-      const userId = signinInput.value.trim();
-      if (!userId) {
-        alert('Please enter your username');
-        return;
-      }
-
+      
       fetch(`${apiBase}/createAcc`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

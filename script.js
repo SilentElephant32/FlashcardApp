@@ -2,6 +2,7 @@
 // SAVE CARD RATINGS AND MAKE ALGORITHM // done
 
 const apiBase = "https://flashcardapp-api.onrender.com";
+
 let deck = [];
 let currentIndex = 0;
 let word = null;
@@ -217,9 +218,7 @@ dropZone.addEventListener('drop', (e) => {
 
     // small delay
     setTimeout(() => {
-      calcDeckLength();
-    updateCardCounter();
-    renderFlashcard();
+     window.location.href = 'signin.html';
 }, 300);
 
 

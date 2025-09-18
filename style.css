@@ -148,6 +148,15 @@ html, body {
     padding: 10px;
   }
 
+    #drop-zone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+}
+
+
   
   .flashcard.flipped
   {
